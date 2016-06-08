@@ -1,0 +1,16 @@
+---
+packages:
+- name: riemannc
+  version: 5ad00331310af469864d5473f7fd0f134d280112
+  fingerprint: 5ad00331310af469864d5473f7fd0f134d280112
+  sha1: dde32e7f625d76b9a422808c246749f1ef78cc52
+  dependencies: []
+jobs:
+- name: riemannc
+  version: 14b55682b94714b475d0b9cc1cca1cf6670aedb8
+  fingerprint: 14b55682b94714b475d0b9cc1cca1cf6670aedb8
+  sha1: 0afb7abd0b380da4a16f74fd46ff11a60f524444
+commit_hash: b7a66d40
+uncommitted_changes: true
+name: riemannc
+version: '1'
