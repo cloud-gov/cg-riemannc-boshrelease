@@ -1,0 +1,29 @@
+---
+autoconf-2.69.tar.gz:
+  object_id: 365787ba-b9b1-44b7-9a6b-4b593e0aa5c0
+  sha: 562471cbcb0dd0fa42a76665acf0dbb68479b78a
+  size: 1927468
+automake-1.15.tar.gz:
+  object_id: e34baa0e-8007-4684-a93f-3acd7e74394e
+  sha: b5a840c7ec4321e78fdc9472e476263fa6614ca1
+  size: 2244206
+git-2.8.4.tar.gz:
+  object_id: b6b6978b-d8b1-495e-bc14-fcc8f823ab0b
+  sha: c9129130d729c351bf3160a23843283e88e9f2f0
+  size: 5842041
+libtool-2.4.6.tar.gz:
+  object_id: cbd4d47b-82a2-4a2c-a067-c7c2757c3013
+  sha: 25b6931265230a06f0fc2146df64c04e5ae6ec33
+  size: 1806697
+protobuf/protobuf-2.6.1.tar.bz2:
+  object_id: 47bfe6c1-27bc-4fbb-afb4-5bf70d5666c1
+  sha: 6421ee86d8fb4e39f21f56991daa892a3e8d314b
+  size: 2021416
+protobuf/protobuf-c-1.2.1.tar.gz:
+  object_id: a0c289e8-4c85-4dc9-a056-8d3b9b119e98
+  sha: 8278571de14dcb51eacdf83e0c65b814fc45ae97
+  size: 458614
+riemann-c-client-4.4.0.tar.gz:
+  object_id: 227696bb-2ee1-402c-8360-509b5313e1b6
+  sha: 17fa39bbca0db1b1f404d0f8737a7c6c855c7bac
+  size: 35592
