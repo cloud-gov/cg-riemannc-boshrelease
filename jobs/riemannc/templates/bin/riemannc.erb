@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+set -u
+
+/var/vcap/packages/riemannc/tools/riemannc --server=<%= p("riemann.server") %> --port=<%= p("riemann.port") %>  $@

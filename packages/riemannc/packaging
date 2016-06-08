@@ -1,0 +1,101 @@
+exec 2>&1
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+set -x
+
+# Detect # of CPUs so make jobs can be parallelized
+CPUS=$(grep -c ^processor /proc/cpuinfo)
+
+# Available variables
+# $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
+# $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
+# autoconf
+export PREFIX=${BOSH_INSTALL_TARGET}
+export PATH=$PREFIX/bin:$PATH
+
+tar xzf autoconf-2.69.tar.gz
+(
+  set -e
+  cd autoconf-2.69
+  autoconf_dir=$PREFIX/share/autoconf ./configure --prefix=$PREFIX
+  make -j${CPUS}
+  make install prefix=$PREFIX
+)
+
+# automake
+tar xzf automake-1.15.tar.gz
+(
+  set -e
+  cd automake-1.15
+  ./configure --prefix=$PREFIX
+  make -j${CPUS}
+  make install prefix=$PREFIX
+)
+
+# libtool
+tar xzf libtool-2.4.6.tar.gz
+(
+  set -e
+  cd libtool-2.4.6
+  ./configure --prefix=$PREFIX
+  make -j${CPUS}
+  make install prefix=$PREFIX
+)
+
+# Protocol buffers
+PROTOBUF_VERSION=`ls -r protobuf/protobuf-*.tar.bz2 | sed 's/protobuf\/protobuf-\(.*\)\.tar\.bz2/\1/' | head -1`
+tar xjvf ${BOSH_COMPILE_TARGET}/protobuf/protobuf-${PROTOBUF_VERSION}.tar.bz2
+(
+  set -e
+  cd protobuf-${PROTOBUF_VERSION}
+  ./configure --prefix=$PREFIX
+  make -j${CPUS}
+  make install
+
+)
+
+# Protobuf-c
+export PKG_CONFIG_PATH=${BOSH_INSTALL_TARGET}/lib/pkgconfig
+tar xvfz protobuf/protobuf-c-1.2.1.tar.gz
+(
+  set -e
+  cd protobuf-c-1.2.1
+  ./configure --prefix=$PREFIX
+  make -j${CPUS}
+  make install
+)
+
+tar xvfz git-2.8.4.tar.gz
+(
+  set -e
+  cd git-2.8.4
+  make configure
+  ./configure --prefix=${BOSH_INSTALL_TARGET}
+  make NO_TCLTK=Yes -j${CPUS}
+  make NO_TCLTK=Yes install
+)
+
+export PATH=$PATH:$PREFIX/bin
+tar xvfz riemann-c-client-4.4.0.tar.gz
+(
+  set -e
+  cd riemann-c-client-4.4.0
+  export HOME=${BOSH_COMPILE_TARGET}
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+  git init
+  git add .
+  git commit -a -m "Initial commit"
+  git tag -a 4.4.0 -m "Updating to 4.4.0"
+
+  aclocal -I m4 && \
+  autoheader && \
+  autoconf && \
+  libtoolize -ic && \
+  automake -ac
+  export CFLAGS="-DRIEMANN_HAVE_INTTYPES_H"
+  ./configure --prefix=$PREFIX --with-protobuf-c-dir=${BOSH_INSTALL_TARGET}
+  make -j${CPUS}
+  make install
+)

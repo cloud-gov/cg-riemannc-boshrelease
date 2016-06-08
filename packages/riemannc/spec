@@ -1,0 +1,12 @@
+---
+name: riemannc
+dependencies:
+files:
+protobuf/protobuf-2.6.1.tar.bz2
+protobuf/protobuf-c-1.2.1.tar.gz
+autoconf-2.69.tar.gz
+automake-1.15.tar.gz
+libtool-2.4.6.tar.gz
+riemann-c-client-4.4.0.tar.gz
+git-2.8.4.tar.gz
+
