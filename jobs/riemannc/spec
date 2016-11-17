@@ -8,7 +8,6 @@ packages:
 
 properties:
   riemann.server:
-    default: 123.123.123.123
     description: "The Riemann server IP"
   riemann.port:
     default: 5555
